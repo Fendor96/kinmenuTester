@@ -1,0 +1,105 @@
+:root{
+    --colorPrinc:#db3a00;
+    --colorSecon:#2d8674;
+    --textSombre1:#223330;
+    --textSombre2:#5c3a2e;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: url('./assets/escheresque-dark.png') !important;
+    background-position: center;
+    background-repeat: repeat;
+    background-color: var(--colorPrinc) !important;
+}
+
+header{
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+    font-size: 20px;
+}
+
+header a{
+    text-decoration: none;
+    color: var(--textSombre1);
+    font-family: 'Poppins', sans-serif;
+}
+
+header a:hover{
+    color: snow;
+}
+
+h1{
+    text-align: center;
+    color: snow;
+    font-family: "Poppins", serif;
+    font-weight: 100;
+}
+
+input, textarea{
+    border: 1px dashed snow;
+    background-color: transparent;
+    padding: 10px;
+    color: snow;
+
+}
+
+::placeholder{
+    color: snow;
+}
+
+input[type="submit"]{
+    color: white;
+}
+
+#sumbit:hover{
+    scale: 1.1;
+    cursor: pointer;
+    background-color: snow !important;
+    color: #2d8674;
+    transition: .2s ease-in-out;
+}
+
+#seconde{
+    color: snow; 
+    font-family: serif;  
+    display: flex;
+    flex-direction: column;
+    text-align: center; 
+    align-items: center;
+}
+
+#seconde p{
+    letter-spacing: 3px;
+    background-color: #223330;
+    width: 80%;
+    margin: auto;
+    padding: 10px;
+    font-family: serif;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+#listes{
+    border: 1px dashed snow;
+    margin: 10px auto;
+    width: 80vw;
+    height: 40vh;
+    overflow-y: scroll;
+    padding: 8px;
+}
+
+.show{
+    display: block;
+}
+
+.hide{
+    display: none;
+}
