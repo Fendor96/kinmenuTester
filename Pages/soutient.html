@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!--Meta-->
+    <meta charset="UTF-8">
+    <meta name="author" content="Axel Nodier">
+    <meta name="keywords" content="menu, restaurant, kinshasa restaurant, reservation">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Fonts and Icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../Styles/soutient.css">
+    <link rel="stylesheet" href="../Styles/header.css">
+
+    <!--Title-->
+    <title>Kin Menu</title>
+</head>
+
+<body>
+    <header>
+        <a href="../index.html">KIN <br> MENU</a>
+    </header>
+
+    <section class="first">
+        <h1>Soutenir <br> le rêve congolais...</h1>
+    </section>
+
+    <form id="don" action="">
+        <div style="margin: 10px;width: 100%; justify-content: center;padding-left: 10px;padding-right: 10px;">
+            <input type="text" id="name" placeholder="Votre Nom Complet" required>
+            <input type="email" id="email" placeholder="Votre adresse mail" required>
+        </div>
+
+        <div style="width:100%;display: flex; justify-content: space-around;">
+            <label for="mobile-money">
+                <input type="radio" name="methodPayement" id="mobile-money">Mobile Money
+            </label>
+
+            <label for="carte">
+                <input type="radio" name="methodPayement"  id="carte">Carte de crédit
+            </label>
+        </div>
+        <section id="cartes" class="hide">
+            <div style="width: 100%;display: flex; justify-content: center;">
+                <input type="text" pattern="\d{16}" placeholder="Numéro de la carte">
+                <input type="text" placeholder="CVV" pattern="\d{3,4}" minlength="3" maxlength="4">
+            </div>
+
+            <div style="justify-content:center;">
+                <input type="text" pattern="(0[1-9]|1[0-2]\/\d{2})" placeholder="Date expiration (MM/AA)">
+            </div>
+        </section>
+
+        <section id="mobiles">
+            <div style="display: flex; justify-content: center;align-items: center;">
+                <select name="mobile-moneys" id="mobiles-moneys" class="hide">
+                    <option value="" selected>Selectionner une option</option>
+                    <option value="Mpesa">Mpesa</option>
+                    <option value="Orange Money">Orange Money</option>
+                    <option value="Airtel Money">Airtel Money</option>
+                </select>
+            </div>
+        </section>
+
+        <div id="price">
+            <p id="results"></p>
+            <p id="results-fc"></p>
+            <input type="submit" value="juste un clique !">
+        </div>
+
+        <input type="range" name="montant" id="montant" min="1" max="500" value="1">
+    </form>
+
+    <div class="divider"></div>
+
+
+    <section id="second">
+
+        <div class="left">
+            <div class="comment-img"></div>
+
+        </div>
+        <div class="right">
+            <h2>Un conseil ? </h2>
+            <p>Nous sommes tout ouïe </p>
+        </div>
+
+          
+    </section>
+
+    <form action="" id="advice" name="advice">
+        <div style="width: 100%; display: flex; justify-content: center; align-items: center; padding: 10px;">
+            <input type="text" placeholder="Votre nom">
+            <input type="email" placeholder="Votre adresse mail">
+        </div>
+        <textarea name="" id="" cols="47" rows="10" placeholder="Je pense que Kin Menu devrez..."></textarea>
+        <input type="submit" value="Envoyer !">
+    </form>
+
+    <section style="display: flex; justify-content: center; align-items: center;width: 100vw;">
+        <div id="done" class="hidden"></div>
+    </section>
+
+
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>KIN MENU</h4>
+                    <p>Simplifiez votre quotidien numérique avec Kin Purchase, un produit Kin Web.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/833922767"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://instagram.com/Kin_Menu"><i class="fab fa-instagram"></i></a>
+                        <a href="https://tiktok.com/KinMenu"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+    
+                <div class="footer-column">
+                    <h4>Liens rapides</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Accueil</a></li>
+                        <li><a href="./discover.html">Découvrir</a></li>
+                        <li><a href="./apropos.html">À propos</a></li>
+                        <li><a href="./login.html">Connexion</a></li>
+                        <li><a href="./signup.html">Inscription</a></li>
+                    </ul>
+                </div>
+    
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:contact@kinmenu.com"><i class="fas fa-envelope"></i> contact@kinmenu.com</a></li>
+                        <li><a href="tel:+243833922767"><i class="fas fa-phone"></i> +243 833 922 767</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Kinshasa, RDC</a></li>
+                    </ul>
+                </div>
+            </div>
+    
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kin Menu. Tous droits réservés.</p>
+                <p>Créé par Axel Nodier</p>
+            </div>
+        </footer>
+
+    <script src="../script/soutient.js"></script>
+</body>
+</html>

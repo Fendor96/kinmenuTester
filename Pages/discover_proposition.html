@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="author" content="Axel Nodier">
+    <meta name="keywords" content="menu, restaurant, kinshasa restaurant, reservation">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonts and Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../Styles/disco_propos.css">
+    <link rel="stylesheet" href="../Styles/header.css">
+  
+
+    <title>Découvrir-Kin Menu</title>
+</head>
+<body>
+
+<header>
+    <div id="logo">KIN <br> MENU</div>
+    
+    <div>
+        <button id="hamburgerBtn">≡</button>
+    </div>
+
+    <div id="menu-bar" class="desactivate">
+        <a href="../index.html">Acceuil</a>
+        <a href="./discover.html" class="active">Découvrir</a>
+        <a href="./apropos.html">A propos</a>
+        <br>
+        <div class="login">
+            <a href="./signup.html">S'incrire</a>
+            <a href="./login.html">Se connecter</a>
+        </div>
+    </div>
+
+    <nav class="nav">
+        <ul>
+            <li><a href="../index.html">Acceuil</a></li>
+            <li><a href="./discover.html" class="active">Découvrir</a></li>
+            <li><a href="./apropos.html">A propos</a></li>
+        </ul>
+        <div class="logins">
+            <li class="login"><a href="./signup.html">S'incrire</a></li>
+            <li class="login"><a href="./login.html">Se connecter</a></li>
+        </div>
+    </nav>
+</header>
+
+<!-- Contenu Principal -->
+<div class="container">
+    <!-- Sidebar avec le formulaire -->
+    <aside class="sidebar">
+        <div class="form-container">
+            <h2>Rechercher un Restaurant</h2>
+            <form id="search-form">
+                <label for="budget">Ton budget:</label>
+                <input type="number" id="budget" name="budget" placeholder="Entrer votre budget">
+                
+                <label for="personnes">Nombre de personnes:</label>
+                <input type="number" id="personnes" name="personnes" placeholder="Combien de personnes ?">
+                
+                <label for="date">A quelle date ?</label>
+                <input type="date" id="date" name="date">
+                
+                <label for="commune">Commune de préférence (facultatif):</label>
+                <input type="text" id="commune" name="commune" placeholder="Votre commune">
+                
+                <label for="cuisine">Type de cuisine (facultatif):</label>
+                <input type="text" id="cuisine" name="cuisine" placeholder="Type de cuisine">
+                
+                <button type="submit">Trouver mon restau</button>
+            </form>
+        </div>
+    </aside>
+
+    <!-- Conteneur des résultats -->
+    <main class="main-content">
+        <div class="results-container">
+            <h2>Résultats de la recherche</h2>
+            <ul id="results-list">
+                <!-- Les résultats seront affichés ici -->
+            </ul>
+        </div>
+    </main>
+</div>
+
+<script src="/script/disco_propos.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du Restaurant</title>
+    <style>
+        :root {
+            --primary-color: #2d4a4a;
+            --secondary-color: #4CAF50;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .restaurant-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .restaurant-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .restaurant-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 1.2rem;
+            color: #ffc107;
+        }
+
+        .restaurant-details {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .restaurant-details {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .detail-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .detail-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .detail-card h2 i {
+            color: var(--secondary-color);
+        }
+
+        .info-group {
+            margin-bottom: 15px;
+        }
+
+        .info-group label {
+            font-weight: 600;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .info-group p {
+            padding-left: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-download {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-download:hover {
+            background-color: #3e8e41;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .menu-section {
+            margin-top: 40px;
+        }
+
+        .menu-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .menu-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.03);
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .menu-item-info {
+            padding: 15px;
+            background: var(--white);
+        }
+
+        .menu-item-info h3 {
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .menu-item-info .price {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Effet de verre pour certaines cartes */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .restaurant-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .detail-card {
+                padding: 20px 15px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../Styles/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div id="logo">KIN <br> MENU</div>
+
+        
+        <div >
+            <button id="hamburgerBtn">≡</button>
+        </div>
+
+        <div id="menu-bar" class="desactivate">
+            <a href="../index.html">Acceuil</a>
+            <a href="./discover.html" class="active">Découvrir</a>
+            <a href="./apropos.html">A propos</a>
+            <br>
+            <div class="login">
+                <a href="./signup.html">S'incrire</a>
+                <a href="./login.html">Se connecter</a>
+            </div>
+        </div>
+
+
+        <nav class="nav">
+            <ul>
+                <li><a href="../index.html" >Acceuil</a></li>
+                <li><a href="./discover.html" style="animation-delay: 1s;" class="active">Découvrir</a></li>
+                <li><a href="./apropos.html" style="animation-delay: 2s;">A propos</a></li>
+            </ul>
+            <div class="logins">
+                <li class="login"><a href="./signup.html" class="solo">S'incrire</a></li>
+                <li class="login deux"><a href="./login.html" class="soloDeux">Se connecter</a></li>
+            </div>
+
+
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="restaurant-header">
+            <h1 id="restaurant-name">Nom du Restaurant</h1>
+            <div class="rating">
+                <span id="restaurant-rating">4.5</span>
+                <i class="fas fa-star"></i>
+            </div>
+        </div>
+
+        <div class="restaurant-details">
+            <div class="detail-card glass-card">
+                <h2><i class="fas fa-info-circle"></i> Informations de base</h2>
+                <div class="info-group">
+                    <label>Adresse :</label>
+                    <p id="restaurant-address">24, Bandalungwa</p>
+                </div>
+                <div class="info-group">
+                    <label>Deuxième adresse :</label>
+                    <p id="restaurant-address2">Bandalungwa</p>
+                </div>
+                <div class="info-group">
+                    <label>Commune :</label>
+                    <p id="restaurant-township">Gombe</p>
+                </div>
+                <div class="info-group">
+                    <label>Type de cuisine :</label>
+                    <p id="restaurant-type">Pizzeria</p>
+                </div>
+            </div>
+
+            <div class="detail-card glass-card">
+                <h2><i class="fas fa-dollar-sign"></i> Informations pratiques</h2>
+                <div class="info-group">
+                    <label>Prix moyen :</label>
+                    <p id="restaurant-price">20 USD/personne</p>
+                </div>
+                <div class="info-group">
+                    <label>Réservation possible :</label>
+                    <p id="restaurant-reservation">Oui</p>
+                </div>
+                <div class="info-group">
+                    <label>Horaires d'ouverture :</label>
+                    <p>Lundi - Dimanche: 10h - 22h</p>
+                </div>
+                <div class="info-group">
+                    <label>Contact :</label>
+                    <p>+243 123 456 789</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="#" class="btn btn-whatsapp" id="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> Réserver via WhatsApp
+            </a>
+            <a href="#" class="btn btn-download" id="menu-btn">
+                <i class="fas fa-download"></i> Télécharger le Menu
+            </a>
+        </div>
+
+        <div class="menu-section">
+            <div class="detail-card">
+                <h2><i class="fas fa-utensils"></i> Notre Menu</h2>
+                <p>Découvrez nos spécialités culinaires</p>
+                
+                <div class="menu-preview">
+                    <div class="menu-item">
+                        <img src="https://source.unsplash.com/random/300x200/?pizza" alt="Pizza">
+                        <div class="menu-item-info">
+                            <h3>Pizza Margherita</h3>
+                            <p class="price">15 USD</p>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://source.unsplash.com/random/300x200/?pasta" alt="Pasta">
+                        <div class="menu-item-info">
+                            <h3>Pâtes Carbonara</h3>
+                            <p class="price">12 USD</p>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://source.unsplash.com/random/300x200/?salad" alt="Salad">
+                        <div class="menu-item-info">
+                            <h3>Salade César</h3>
+                            <p class="price">10 USD</p>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://source.unsplash.com/random/300x200/?dessert" alt="Dessert">
+                        <div class="menu-item-info">
+                            <h3>Tiramisu</h3>
+                            <p class="price">8 USD</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>KIN MENU</h4>
+                <p>Simplifiez votre quotidien numérique avec Kin Purchase, un produit Kin Web.</p>
+                <div class="social-links">
+                    <a href="https://wa.me/833922767"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/Kin_Menu"><i class="fab fa-instagram"></i></a>
+                    <a href="https://tiktok.com/KinMenu"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>Liens rapides</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Accueil</a></li>
+                    <li><a href="./discover.html">Découvrir</a></li>
+                    <li><a href="./apropos.html">À propos</a></li>
+                    <li><a href="./login.html">Connexion</a></li>
+                    <li><a href="./signup.html">Inscription</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul class="footer-links">
+                    <li><a href="mailto:contact@kinmenu.com"><i class="fas fa-envelope"></i> contact@kinmenu.com</a></li>
+                    <li><a href="tel:+243833922767"><i class="fas fa-phone"></i> +243 833 922 767</a></li>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> Kinshasa, RDC</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Kin Menu. Tous droits réservés.</p>
+            <p>Créé par Axel Nodier</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Récupérer le slug depuis l'URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const slug = urlParams.get('slug');
+            
+            // Trouver le restaurant correspondant
+            const restaurants = [
+                {
+                    slug: "pizza-inn",
+                    nom: "Pizza-inn",
+                    adresse: "24",
+                    deuxiemeAdresse: "Bandalungwa",
+                    type: "Pizzeria",
+                    prixMoyen: 20,
+                    note: "4",
+                    commune: "Gombe",
+                    isDatable: "non",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "kin-tacos",
+                    nom: "Kin Tacos",
+                    adresse: "24",
+                    deuxiemeAdresse: "Assanef",
+                    type: "Fast-food",
+                    prixMoyen: 15,
+                    note: "3.5",
+                    commune: "Kintambo",
+                    isDatable: "non",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "burger-guys",
+                    nom: "Burger guys",
+                    adresse: "GB",
+                    deuxiemeAdresse: "",
+                    type: "Fast-food",
+                    prixMoyen: 15,
+                    note: "3",
+                    commune: "Gombe",
+                    isDatable: "non",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "delifrance",
+                    nom: "Délifrance",
+                    adresse: "Blvrd 30 juin",
+                    deuxiemeAdresse: "Defacto",
+                    type: "Boulangerie, Patisserie & vienoiserie",
+                    prixMoyen: 17,
+                    note: "4",
+                    commune: "Gombe",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "opoeta",
+                    nom: "Opoeta",
+                    adresse: "Kintambo",
+                    deuxiemeAdresse: "cimetière Gombe",
+                    type: "Pizeria & restaurant",
+                    prixMoyen: 20,
+                    note: "3",
+                    commune: "Kintambo",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "kfc",
+                    nom: "KFC",
+                    adresse: "24novembre",
+                    deuxiemeAdresse: "",
+                    type: "Fast-Food",
+                    prixMoyen: 15,
+                    note: "3",
+                    commune: "Gombe",
+                    isDatable: "non",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "chocolate",
+                    nom: "Chocolate Serayi",
+                    adresse: "Blvrd 30juin",
+                    deuxiemeAdresse: "Socimat",
+                    type: "Glacier",
+                    prixMoyen: 12,
+                    note: "4",
+                    commune: "Gombe",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "malamu",
+                    nom: "Malamu",
+                    adresse: "24",
+                    deuxiemeAdresse: "",
+                    type: "Restaurant",
+                    prixMoyen: 20,
+                    note: "4",
+                    commune: "Gombe",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "3z",
+                    nom: "3z",
+                    adresse: "Gombe",
+                    deuxiemeAdresse: "",
+                    type: "Restaurant",
+                    prixMoyen: 35,
+                    note: "4.5",
+                    commune: "Gombe",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "villa",
+                    nom: "Villa Tricana",
+                    adresse: "Gombe",
+                    deuxiemeAdresse: "",
+                    type: "Restaurant",
+                    prixMoyen: 20,
+                    note: "4",
+                    commune: "Gombe",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "palms",
+                    nom: "Palms",
+                    adresse: "Mt Fleury",
+                    deuxiemeAdresse: "",
+                    type: "Restaurant",
+                    prixMoyen: 20,
+                    note: "3",
+                    commune: "Kintambo",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "donishka",
+                    nom: "Donishka",
+                    adresse: "Macampagne",
+                    deuxiemeAdresse: "UPN",
+                    type: "Fast-food",
+                    prixMoyen: 15,
+                    note: "3",
+                    commune: "Ngaliema",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "chezmomo",
+                    nom: "Chez Momo",
+                    adresse: "upn-marine",
+                    deuxiemeAdresse: "",
+                    type: "Terasse-Restau",
+                    prixMoyen: 12,
+                    note: "3",
+                    commune: "Ngaliema",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+
+
+                {
+                    nom: "110 Street", 
+                    commune:"Gombe",
+                    deuxiemeAdresse: "",
+                    type: "Fast-food",
+                    prixMoyen:17, 
+                    note:"4", 
+                    adresse:"Gombe", 
+                    isDatable:"oui", 
+                    slug: "110street"
+                },
+
+                {
+                    nom: "Makusa", 
+                    adresse:"06, Av Bobila", 
+                    deuxiemeAdresse: "", 
+                    type:"Restaurant", 
+                    prixMoyen:40,
+                    note:"5", 
+                    commune:"Ngaliema", 
+                    isDatable:"oui", 
+                    slug:"makusa"
+                },
+
+
+                {
+                    nom:"Big Bite",
+                    adresse:"Avenue du 24 Novembre",
+                    deuxiemeAdresse:"", 
+                    type:"Fast-Food", 
+                    note:12, 
+                    note:"2.5", 
+                    commune:"Lingwala", 
+                    isDatable:"non", 
+                    slug:"bigbite"
+                },
+
+                {
+                    nom:"Tandoor",
+                    adresse:"Modern Paradise 8225, Av. Kabasele Tshamala",
+                    deuxiemeAdresse: "", 
+                    type:"Restaurant", 
+                    prixMoyen:25, 
+                    note:"4", 
+                    commune:"Kinshasa", 
+                    isDatable:"oui" ,
+                    slug:"tandoor"
+                },
+
+                { 
+                    nom:"Cold Stone",
+                    adresse:" 8 Av. Du Port, Kinshasa", 
+                    commune:"Gombe", 
+                    type:"Fast-food",
+                    prixMoyen: 15, 
+                    note:"3", 
+                    deuxiemeAdresse:"Ngaliema",
+                    isDatable:"oui",
+                    slug:"cold-stone"
+                },
+
+                {
+                    name:"Royal", 
+                    adresse:"Blvrd du 30 juin",
+                    deuxiemeAdresse: "", 
+                    type:"Fast-food",
+                    prixMoyen:15,
+                    note:"3", 
+                    commune:"Gombe",
+                    isDatable:"oui", 
+                    slug:"royal"
+                },
+
+                {
+                    name:"Kiriku", 
+                    adresse:"Av. Prince De Liege En Face Isipa Shaumba", 
+                    deuxiemeAdresse:"UPN, Ngaliema", 
+                    type:"Fast-food",
+                    prixMoyen:17, 
+                    note:"2", 
+                    commune:"Ngaliema", 
+                    isDatable:"oui", 
+                    slug:"kiriku"
+                },
+
+                {
+                    nom:"Seray", 
+                    adresse:"Immeuble 1113, Bd Du 30 Juin, Kinshasa",
+                    deuxiemeAdresse:"", 
+                    type:"Restaurant", 
+                    prixMoyen:50,
+                    note:"5", 
+                    commune:"Gombe",
+                    isDatable:"oui", 
+                    slug:"seray"
+                
+                },
+
+                {
+                    nom:"Phoenicia", 
+                    adresse:"ISCC, 7 eme, Av. Du 24 Novembre",
+                    deuxiemeAdresse:"", 
+                    type:"Restaurant", 
+                    note:50, 
+                    prixMoyen:"5", 
+                    commune:"Gombe", 
+                    isDatable:"oui",
+                    slug:"phoenicia"
+                },
+
+
+                {
+                    slug: "sk",
+                    nom: "S&K restaurant",
+                    adresse: "Rte Matadi/ex-peloustore)",
+                    deuxiemeAdresse: "",
+                    type: "Fast-Food",
+                    prixMoyen: 12,
+                    note: "3",
+                    commune: "Ngaliema",
+                    isDatable: "non",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "fatburger",
+                    nom: "Fat Burger",
+                    adresse: "Gb",
+                    deuxiemeAdresse: "Blvrd du 30 juin",
+                    type: "Fast-food",
+                    prixMoyen: 25,
+                    note: "3",
+                    commune: "Gombe",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "street",
+                    nom: "110 street",
+                    adresse: "Blvrd 30juin",
+                    deuxiemeAdresse: "",
+                    type: "Fast-food",
+                    prixMoyen: 18,
+                    note: "4",
+                    commune: "Gombe",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "oneZoo",
+                    nom: "One Zoo",
+                    adresse: "1er shopping Mall",
+                    deuxiemeAdresse: "",
+                    type: "boisson",
+                    prixMoyen: 7,
+                    note: "4.5",
+                    commune: "Gombe",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "klounge",
+                    nom: "K-Lounge",
+                    adresse: "Blvrd 30 juin",
+                    deuxiemeAdresse: "",
+                    type: "Lounge",
+                    prixMoyen: 14,
+                    note: "4",
+                    commune: "Gombe",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "metrobar",
+                    nom: "Metro Bar",
+                    adresse: "Bandal",
+                    deuxiemeAdresse: "Blvrd",
+                    type: "Bar",
+                    prixMoyen: 14,
+                    note: "4",
+                    commune: "Bandalungwa",
+                    isDatable: "non",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "pymabar",
+                    nom: "Pyma Bar",
+                    adresse: "Bandal",
+                    deuxiemeAdresse: "",
+                    type: "Bar",
+                    prixMoyen: 20,
+                    note: "4",
+                    commune: "Bandalungwa",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "erickayser",
+                    nom: "Eric Kayser",
+                    adresse: "ville",
+                    deuxiemeAdresse: "limete",
+                    type: "Boulangerie,Patisserie & vienoiserie",
+                    prixMoyen: 12,
+                    note: "4.5",
+                    commune: "Gombe",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "firenze",
+                    nom: "Firenze",
+                    adresse: "Huilerie (ref-INRB)",
+                    deuxiemeAdresse: "",
+                    type: "Boulangerie, Patisserie & vienoiserie",
+                    prixMoyen: 12,
+                    note: "4",
+                    commune: "Gombe",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "chezpaul",
+                    nom: "Chez Paul",
+                    adresse: "Gombe",
+                    deuxiemeAdresse: "",
+                    type: "Boulangerie, Patisserie & vienoiserie",
+                    prixMoyen: 20,
+                    note: "4",
+                    commune: "Gombe",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "wabisabi",
+                    nom: "Wabi sabi",
+                    adresse: "Gombe",
+                    deuxiemeAdresse: "",
+                    type: "Restaurant",
+                    prixMoyen: 30,
+                    note: "4.5",
+                    commune: "Gombe",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "celia",
+                    nom: "Celia",
+                    adresse: "Shopping Mall",
+                    deuxiemeAdresse: "",
+                    type: "Restaurant",
+                    prixMoyen: 20,
+                    note: "4",
+                    commune: "Gombe",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+                {
+                    slug: "sicilia",
+                    nom: "Sicilia",
+                    adresse: "Gombe",
+                    deuxiemeAdresse: "",
+                    type: "Restaurant",
+                    prixMoyen: 40,
+                    note: "3",
+                    commune: "Gombe",
+                    isDatable: "oui",
+                    telephone: "",
+                    horaires: "",
+                    menuPDF: ""
+                },
+
+                {
+                    slug: "pizza-inn",
+                    nom: "Pizza-inn",
+                    adresse: "24",
+                    deuxiemeAdresse: "Bandalungwa",
+                    type: "Pizzeria",
+                    prixMoyen: 20,
+                    note: "4",
+                    commune: "Gombe",
+                    isDatable: "non",
+                    telephone: "+243 810 123 456",
+                    horaires: "Lundi - Dimanche: 10h - 22h",
+                    menuPDF: "menu-pizza-inn.pdf"
+                },
+
+            ];
+
+            const restaurant = restaurants.find(r => r.slug === slug);
+            
+            if (restaurant) {
+                // Afficher les informations du restaurant
+                document.getElementById('restaurant-name').textContent = restaurant.nom;
+                document.getElementById('restaurant-rating').textContent = restaurant.note;
+                document.getElementById('restaurant-address').textContent = restaurant.adresse;
+                document.getElementById('restaurant-address2').textContent = restaurant.deuxiemeAdresse || "Non disponible";
+                document.getElementById('restaurant-township').textContent = restaurant.commune;
+                document.getElementById('restaurant-type').textContent = restaurant.type;
+                document.getElementById('restaurant-price').textContent = `${restaurant.prixMoyen} USD/personne`;
+                document.getElementById('restaurant-reservation').textContent = restaurant.isDatable === "oui" ? "Oui" : "Non";
+                
+                // Configurer le bouton WhatsApp
+                const whatsappBtn = document.getElementById('whatsapp-btn');
+                const message = `Bonjour, je souhaite réserver une table chez ${restaurant.nom}.`;
+                whatsappBtn.href = `https://wa.me/${restaurant.telephone}?text=${encodeURIComponent(message)}`;
+                
+                // Configurer le bouton de menu
+                const menuBtn = document.getElementById('menu-btn');
+                if (restaurant.menuPDF) {
+                    menuBtn.href = `pdf/${restaurant.menuPDF}`;
+                    menuBtn.download = `menu-${restaurant.slug}.pdf`;
+                } else {
+                    menuBtn.style.display = 'none';
+                }
+            } else {
+                // Redirection si le restaurant n'est pas trouvé
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
