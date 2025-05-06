@@ -306,6 +306,19 @@
             text-align: center;
         }
 
+        .partners.restau{
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            overflow-x: scroll;
+            scrollbar-width: none;
+            align-items: center;
+        }
+
+        .partners.restau h2{
+            font-size: 30px;
+        }
+
         .partners h2 {
             margin-bottom: 3rem;
         }
@@ -742,6 +755,16 @@
                 grid-template-columns: 1fr 1fr;
             }
         }
+
+        .partners a{
+            background-color: #f5f5f5c2;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .partners a:hover{
+            background-color: transparent;
+        }
     </style>
 </head>
 <body>
@@ -796,6 +819,42 @@
             </div>
         </div>
     </section>
+
+        <!-- Partners Section -->
+        <section class="partners restau">
+            <h2>Tous vos restaurants préférés chez <span>Kin Menu !</span> <br> <a href="./Pages/discover.html" style="background-color:#db3a00; padding: 8px; margin: 10px auto; font-size: 18px;border-radius: 10px;">Découvrir plus</a></h2>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <img src="./Styles/assets/kintacos.png" alt="Kin Tacos" width="60" loading="lazy">
+                    <h3>Sicillia</h3>
+                    <a href="./Pages/moretest.html?slug=sicilia">Voir plus</a>
+                </div>
+
+                <div class="partner-card">
+                    <img src="./Styles/assets/kintacos.png" alt="Kin Tacos" width="60" loading="lazy">
+                    <h3>Big Bite</h3>
+                    <a href="./Pages/moretest.html?slug=bigbite">Voir plus</a>
+                </div>
+
+                <div class="partner-card">
+                    <img src="./Styles/assets/pizzainn.png" alt="Pizza Inn" width="60" loading="lazy">
+                    <h3>Pizza Inn</h3>
+                    <a href="./Pages/moretest.html?slug=pizza-inn">Voir plus</a>
+    
+                </div>
+                <div class="partner-card">
+                    <img src="./Styles/assets/110.png" alt="110's Street" width="60" loading="lazy">
+                    <h3>110's Street</h3>
+                    <a href="./Pages/moretest.html?slug=110street">Voir plus</a>
+                </div>
+                <div class="partner-card">
+                    <img src="./Styles/assets/chicken.png" alt="Kin Fried Chicken" width="60" loading="lazy">
+                    <h3>Kin Fried Chicken</h3>
+                    <a href="./Pages/moretest.html?slug=kfc">Voir plus</a>
+    
+                </div>
+            </div>
+        </section>
 
     <!-- Discover Section -->
     <section class="discover">

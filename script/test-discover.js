@@ -66,16 +66,39 @@ const searchByBudget = (max, min, nbrePersonne, isDatable) => {
     let results = [];
 
 
-    if (isDatable == "No" || nbrePersonne == 2 || !isDatable){
+    if (isDatable == "No" || !isDatable){
         
         restau.forEach(restaurant => {
-            if (restaurant.prixMoyen >= min && restaurant.prixMoyen <= max) {
+            if (restaurant.prixMoyen <= max) {
                 results.push(restaurant);
             }
         });
 
         if (results.length === 0) {
-            searchName.innerHTML = '<p>Aucun restaurant trouvé dans cette plage de prix.</p>';
+            searchName.innerHTML = '<p>Aucun restaurant trouvé dans cette plage de prix. <br> Avec 10$ de plus vous pourrez trouver: </p>';
+            max = max + 10;
+            const resultsB = [];
+            restau.forEach(restaurant =>{
+                if(restaurant.prixMoyen <= max){
+                    resultsB.push(restaurant);
+                }
+            })
+
+            resultsB.forEach(restaurant => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <h2>${restaurant.nom}</h2>
+                    <p>Commune : ${restaurant.commune || "Nan"}</p>
+                    <p>Type de cuisine : ${restaurant.type}</p>
+                    <p>Prix moyen : ${restaurant.prixMoyen} USD/personne</p>
+                    <a class="newLink" href="${`../pages/moretest.html?slug=${restaurant.slug}`}">En savoir plus</a>
+                `;
+                div.classList.add('next');
+                searchName.appendChild(div);
+                searchName.classList.replace('no-flex', 'flex');
+    
+            })
+
             return;
         }
 
@@ -208,7 +231,8 @@ document.getElementById("searcher").addEventListener('submit', function(e) {
     const isDate = document.querySelector('input[name="dateOrNot"]:checked')?.value || "No";
     const nbrePersonne = parseInt(document.getElementById('range-personne').value);
     const min = parseInt(document.getElementById('range').value);
-    const max = min + 5;
+    const max = (min/nbrePersonne) + 5;
+    console.log(isDate);
     searchByBudget(max, min, nbrePersonne, isDate);
 });
 
