@@ -5,6 +5,7 @@
     <link rel="icon" href="../Styles/assets/favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Détails du Restaurant</title>
+    <link rel="stylesheet" href="../Styles/header.css">
     <style>
         :root {
             --primary-color: #2d4a4a;
@@ -258,42 +259,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <div id="logo">KIN <br> MENU</div>
+        <div id="logo" style="font-family: Pacifico !important;"><a href="../index.html" style="text-decoration: none; color: inherit; font-family: inherit;"> KIN <br> MENU</a></div>
 
-        
-        <div >
-            <button id="hamburgerBtn">≡</button>
-        </div>
-
-        <div id="menu-bar" class="desactivate">
-            <a href="../index.html">Acceuil</a>
-            <a href="./discover.html" class="active">Découvrir</a>
-            <a href="./apropos.html">A propos</a>
-            <br>
-            <div class="login">
-                <a href="./signup.html">S'incrire</a>
-                <a href="./login.html">Se connecter</a>
-            </div>
-        </div>
-
-
-        <nav class="nav">
+        <nav class="nav-links">
             <ul>
-                <li><a href="../index.html" >Acceuil</a></li>
-                <li><a href="./discover.html" style="animation-delay: 1s;" class="active">Découvrir</a></li>
-                <li><a href="./apropos.html" style="animation-delay: 2s;">A propos</a></li>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="./discover.html" class="active">Découvrir</a></li>
+                <li><a href="./apropos.html">À propos</a></li>
             </ul>
-            <div class="logins">
-                <li class="login"><a href="./signup.html" class="solo">S'incrire</a></li>
-                <li class="login deux"><a href="./login.html" class="soloDeux">Se connecter</a></li>
+            <div class="auth-links">
+                <a href="./signup.html">S'inscrire</a>
+                <a href="./login.html" >Se connecter</a>
             </div>
-
-
         </nav>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
     </header>
 
-    <div class="container">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="mobile-links">
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="./discover.html" class="active">Découvrir</a></li>
+            <li><a href="./apropos.html">À propos</a></li>
+            <li><a href="./signup.html">S'inscrire</a></li>
+            <li><a href="./login.html">Se connecter</a></li>
+        </ul>
+    </div>
+    <div class="container" style="margin-top: 150px;">
         <div class="restaurant-header">
             <h1 id="restaurant-name">Nom du Restaurant</h1>
             <div class="rating">
@@ -431,7 +431,7 @@
             <p>Créé par Axel Nodier</p>
         </div>
     </footer>
-
+    <script src="../script/header.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Récupérer le slug depuis l'URL

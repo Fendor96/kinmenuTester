@@ -27,159 +27,13 @@ body{
     display: none;
 }
 
-header{
-    padding: 12px;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    width: 100%;
-}
-
-
-header nav{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-
-header nav ul{
-    display: flex;
-    flex: 1.9;
-    justify-content: space-around;
-}
-
-header nav ul li{
-    list-style: none;
-}
-header nav ul li a{
+a{
     text-decoration: none;
-    color: black;
-    
-}
-
-header a:not(.soloDeux):hover{
-    color: var(--colorPrinc);
-    transition: .2s ease-in-out;
-    border-bottom: 2px solid var(--colorPrinc);
-    padding-bottom: 5px;
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
-.active{
-    color: var(--colorPrinc);
-    border-bottom: 2px solid var(--colorPrinc);
-    padding-bottom: 5px;
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
-nav .logins a{
-    font-size: 0.7rem;
-}
-
-
-#hamburgerBtn{
-    display: none;
-}
-
-@media screen and (width:768px){
-    .nav ul a{
-        font-size: 12px;
-    }
-
-    .logins a{
-        font-size: 8px;
-    }
-
-
 }
 
 
 
 @media only screen and (max-width:720px){
-
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    #hamburgerBtn{
-        display: block;
-        font-size: 2.5rem;
-        cursor: pointer;
-    }
-
-    .nav{
-        display: none;
-    }
-
-    .activate{
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        width: 95vw;
-        height: 70vh;
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
-        transform: translateX(100px);
-        margin: 10px auto;
-        background-color: #2d8674da;
-        color: white;
-        animation: slide-in 0.5s 1s ease-in-out 1 forwards;
-        z-index: 100;
-        border-radius: 4px;
-    }
-
-    .activate a{
-        color: white;
-        text-decoration: none;
-        font-size: 2.4vh;
-    }
-
-    .activate div{
-        display: flex;
-        flex-direction: column;
-    }
-
-
-    @keyframes slide-in {
-        to{
-            transform: translateX(0px);
-            opacity: 1;
-        }
-    }
-
-    .activate::before{
-        content: "";
-        Z-index:-10;
-        width: 100vw;
-        height: 100vh;
-        background-color: #ffffff;
-        position: absolute;
-        filter: blur(6px);
-        top: 0;
-        left: 0;
-        opacity: 0.1;
-    }
-
-    header button{
-        display: block;
-        font-size: 4vh;
-        width: 20%;
-        height: 20%;
-        padding: 20px;
-        background-color: transparent;
-        border: none;
-        color: var(--colorPrinc);
-        z-index: 200;
-        position: relative;
-    }
 
     .intro{
         text-align: center;
@@ -263,6 +117,7 @@ nav .logins a{
 /*DEBUT DE LA SECTION FIND BY BUDGET*/
 
 .findByBudget{
+    margin-top: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;

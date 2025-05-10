@@ -12,44 +12,43 @@
 <body>
 
 
+    <!-- Header -->
     <header>
-        <div id="logo">KIN <br> MENU</div>
+        <div id="logo"><a href="../index.html" style="text-decoration: none; color: inherit; font-family: inherit;"> KIN <br> MENU</a></div>
 
-        
-        <div >
-            <button id="hamburgerBtn">≡</button>
-        </div>
-
-        <div id="menu-bar" class="desactivate">
-            <a href="../index.html">Acceuil</a>
-            <a href="./discover.html">Découvrir</a>
-            <a href="./apropos.html">A propos</a>
-            <br>
-            <div class="login">
-                <a href="./signup.html">S'incrire</a>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="./discover.html">Découvrir</a></li>
+                <li><a href="./apropos.html">À propos</a></li>
+            </ul>
+            <div class="auth-links">
+                <a href="./signup.html">S'inscrire</a>
                 <a href="./login.html" class="active">Se connecter</a>
             </div>
-        </div>
-
-
-        <nav class="nav">
-            <ul>
-                <li><a href="../index.html">Acceuil</a></li>
-                <li><a href="./discover.html" style="animation-delay: 1s;">Découvrir</a></li>
-                <li><a href="./apropos.html" style="animation-delay: 2s;">A propos</a></li>
-            </ul>
-            <div class="logins">
-                <li class="login"><a href="./signup.html" class="solo">S'incrire</a></li>
-                <li class="login deux"><a href="./login.html" class="soloDeux" class="active">Se connecter</a></li>
-            </div>
-
-
         </nav>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
     </header>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="mobile-links">
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="./discover.html">Découvrir</a></li>
+            <li><a href="./apropos.html">À propos</a></li>
+            <li><a href="./signup.html">S'inscrire</a></li>
+            <li><a href="./login.html" class="active">Se connecter</a></li>
+        </ul>
+    </div>
     <div class="divider orange"></div>
 
-    <section class="main">
+    <section class="main" style="margin-top: 150px;">
         <form class="form" method="post" action="../configuration/login.php">
         <div class="flex-column">
           <label>Email </label></div>
@@ -150,6 +149,7 @@
     <script src="../script/main.js"></script>
     <script src="../script/signup.js"></script>
     <script src="../script/internet-checker.js"></script>
+    <script src="../script/header.js"></script>
 
 </body>
 </html>

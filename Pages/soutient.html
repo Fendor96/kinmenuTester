@@ -25,9 +25,40 @@
 </head>
 
 <body>
+    <!-- Header -->
     <header>
-        <a href="../index.html">KIN <br> MENU</a>
+        <div id="logo">KIN <br> MENU</div>
+
+        <nav class="nav-links">
+            <ul>
+                <li><a href="./index.html" class="active">Accueil</a></li>
+                <li><a href="./Pages/discover.html">Découvrir</a></li>
+                <li><a href="./Pages/apropos.html">À propos</a></li>
+            </ul>
+            <div class="auth-links">
+                <a href="./Pages/signup.html">S'inscrire</a>
+                <a href="./Pages/login.html" >Se connecter</a>
+            </div>
+        </nav>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
     </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="mobile-links">
+            <li><a href="./index.html" class="active">Accueil</a></li>
+            <li><a href="./Pages/discover.html">Découvrir</a></li>
+            <li><a href="./Pages/apropos.html">À propos</a></li>
+            <li><a href="./Pages/signup.html">S'inscrire</a></li>
+            <li><a href="./Pages/login.html">Se connecter</a></li>
+        </ul>
+    </div>
 
     <section class="first">
         <h1>Soutenir <br> le rêve congolais...</h1>

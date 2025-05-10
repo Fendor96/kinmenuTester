@@ -1,12 +1,14 @@
-const hamburgerBtn = document.getElementById('hamburgerBtn');
-const menu = document.getElementById('menu-bar');
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileMenu = document.getElementById('mobileMenu');
 
-hamburgerBtn.addEventListener("click", ()=>{
-    if(menu.classList.contains('desactivate')){
-        menu.classList.replace('desactivate', 'activate');
-        hamburgerBtn.textContent = 'X';
-    }else{
-        menu.classList.replace('activate', 'desactivate');
-        hamburgerBtn.textContent = '☰';
-    }
-});
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
