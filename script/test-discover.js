@@ -57,34 +57,152 @@ const restau = [
 
 const searchName = document.getElementById("resultats");
 
-const searchByBudget = (max, min, nbrePersonne, isDatable) => {
-    searchName.innerHTML = '';
-    if(nbrePersonne){
-        min = parseInt(min/nbrePersonne);
+// Restaurant class and data remains the same...
+
+// Loader functions
+const showLoader = () => {
+    const loader = document.getElementById('loader-container');
+    if (loader) {
+        loader.style.display = "flex"; // Changed from visibility to display
+        loader.style.visibility = "visible";
     }
+};
 
-    let results = [];
+const hideLoader = () => {
+    const loader = document.getElementById('loader-container');
+    if (loader) {
+        loader.style.display = "none";
+    }
+};
 
-
-    if (isDatable == "No" || !isDatable){
-        
-        restau.forEach(restaurant => {
-            if (restaurant.prixMoyen <= max) {
-                results.push(restaurant);
+// Make search functions return Promises
+const searchByBudget = async (max, min, nbrePersonne, isDatable) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            searchName.innerHTML = '';
+            if(nbrePersonne){
+                min = parseInt(min/nbrePersonne);
             }
-        });
 
-        if (results.length === 0) {
-            searchName.innerHTML = '<p>Aucun restaurant trouvé dans cette plage de prix. <br> Avec 10$ de plus vous pourrez trouver: </p>';
-            max = max + 10;
-            const resultsB = [];
-            restau.forEach(restaurant =>{
-                if(restaurant.prixMoyen <= max){
-                    resultsB.push(restaurant);
+            let results = [];
+
+            if (isDatable == "No" || !isDatable){
+                restau.forEach(restaurant => {
+                    if (restaurant.prixMoyen <= max) {
+                        results.push(restaurant);
+                    }
+                });
+
+                if (results.length === 0) {
+                    searchName.innerHTML = '<p>Aucun restaurant trouvé dans cette plage de prix. <br> Avec 10$ de plus vous pourrez trouver: </p>';
+                    max = max + 10;
+                    const resultsB = [];
+                    restau.forEach(restaurant =>{
+                        if(restaurant.prixMoyen <= max){
+                            resultsB.push(restaurant);
+                        }
+                    })
+
+                    resultsB.forEach(restaurant => {
+                        const div = document.createElement('div');
+                        div.innerHTML = `
+                            <h2>${restaurant.nom}</h2>
+                            <p>Commune : ${restaurant.commune || "Nan"}</p>
+                            <p>Type de cuisine : ${restaurant.type}</p>
+                            <p>Prix moyen : ${restaurant.prixMoyen} USD/personne</p>
+                            <a class="newLink" href="${`../pages/moretest.html?slug=${restaurant.slug}`}">En savoir plus</a>
+                        `;
+                        div.classList.add('next');
+                        searchName.appendChild(div);
+                        searchName.classList.replace('no-flex', 'flex');
+                    });
+                    resolve();
+                    return;
                 }
-            })
 
-            resultsB.forEach(restaurant => {
+                results.forEach(restaurant => {
+                    const div = document.createElement('div');
+                    div.innerHTML = `
+                        <h2>${restaurant.nom}</h2>
+                        <p>Commune : ${restaurant.commune || "Nan"}</p>
+                        <p>Type de cuisine : ${restaurant.type}</p>
+                        <p>Prix moyen : ${restaurant.prixMoyen} USD/personne</p>
+                        <a class="newLink" href="${`../pages/moretest.html?slug=${restaurant.slug}`}">En savoir plus</a>
+                    `;
+                    div.classList.add('next');
+                    searchName.appendChild(div);
+                    searchName.classList.replace('no-flex', 'flex');
+                });
+                resolve();
+            } else {
+                restau.forEach(restaurant => {
+                    if (restaurant.prixMoyen >= min && restaurant.prixMoyen <= max && restaurant.isDatable == "oui") {
+                        results.push(restaurant);
+                    }
+                });
+
+                if (results.length === 0) {
+                    searchName.innerHTML = '<p>Aucun restaurant trouvé dans cette plage de prix.</p>';
+                    resolve();
+                    return;
+                }
+
+                results.forEach(restaurant => {
+                    const div = document.createElement('div');
+                    div.innerHTML = `
+                        <h2>${restaurant.nom}</h2>
+                        <p>Commune : ${restaurant.commune || "Nan"}</p>
+                        <p>Type de cuisine : ${restaurant.type}</p>
+                        <p>Prix moyen : ${restaurant.prixMoyen} USD/personne</p>
+                        <a class="newLink" href="${`../pages/moretest.html?slug=${restaurant.slug}`}">En savoir plus</a>
+                    `;
+                    div.classList.add('next');
+                    searchName.appendChild(div);
+                    searchName.classList.replace('no-flex', 'flex');
+                });
+                resolve();
+            }
+        }, 100); // Small delay to allow UI to update
+    });
+};
+
+const searching = async (name, township, typeCuisine) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            searchName.innerHTML = '';
+            console.log(name, township, typeCuisine);
+            
+            let results = [];
+
+            if (name) {
+                searchByName(name);
+                resolve();
+                return;
+            }
+
+            if (township && typeCuisine) {
+                results = restau.filter(restaurant => 
+                    restaurant.commune.toLowerCase().normalize("NFD").replace(/[^a-zA-Z0-9 ]/g,"") === township.toLowerCase().replace(/[^a-zA-Z0-9 ]/g,"").normalize("NFD") && 
+                    restaurant.type.toLowerCase().normalize("NFD").replace(/[^a-zA-Z0-9 ]/g,"") === typeCuisine.toLowerCase().normalize("NFD").replace(/[^a-zA-Z0-9 ]/g,"")
+                );
+            } else if (township) {
+                results = restau.filter(restaurant => 
+                    restaurant.commune.toLowerCase().normalize("NFD").replace(/[^a-zA-Z0-9 ]/g,"") === township.toLowerCase().normalize("NFD").replace(/[^a-zA-Z0-9 ]/g,"")
+                );
+            } else if (typeCuisine) {
+                results = restau.filter(restaurant => 
+                    restaurant.type.toLowerCase().normalize("NFD").replace(/[^a-zA-Z0-9 ]/g,"") === typeCuisine.toLowerCase().normalize("NFD").replace(/[^a-zA-Z0-9 ]/g,"")
+                );
+            }
+
+            if (results.length === 0) {
+                searchName.classList.replace('no-flex', 'flex');
+                searchName.innerHTML = '<p>Aucun restaurant trouvé avec ces critères.</p>';
+                resolve();
+                return;
+            }
+
+            results.forEach(restaurant => {
                 const div = document.createElement('div');
                 div.innerHTML = `
                     <h2>${restaurant.nom}</h2>
@@ -96,153 +214,75 @@ const searchByBudget = (max, min, nbrePersonne, isDatable) => {
                 div.classList.add('next');
                 searchName.appendChild(div);
                 searchName.classList.replace('no-flex', 'flex');
-    
-            })
-
-            return;
-        }
-
-        results.forEach(restaurant => {
-            const div = document.createElement('div');
-            div.innerHTML = `
-                <h2>${restaurant.nom}</h2>
-                <p>Commune : ${restaurant.commune || "Nan"}</p>
-                <p>Type de cuisine : ${restaurant.type}</p>
-                <p>Prix moyen : ${restaurant.prixMoyen} USD/personne</p>
-                <a class="newLink" href="${`../pages/moretest.html?slug=${restaurant.slug}`}">En savoir plus</a>
-            `;
-            div.classList.add('next');
-            searchName.appendChild(div);
-            searchName.classList.replace('no-flex', 'flex');
-        });
-
-    }else{
-
-        restau.forEach(restaurant => {
-            if (restaurant.prixMoyen >= min && restaurant.prixMoyen <= max && restaurant.isDatable == "oui") {
-                results.push(restaurant);
-            }
-        });
-
-        if (results.length === 0) {
-            searchName.innerHTML = '<p>Aucun restaurant trouvé dans cette plage de prix.</p>';
-            return;
-        }
-
-        results.forEach(restaurant => {
-            const div = document.createElement('div');
-            div.innerHTML = `
-                <h2>${restaurant.nom}</h2>
-                <p>Commune : ${restaurant.commune || "Nan"}</p>
-                <p>Type de cuisine : ${restaurant.type}</p>
-                <p>Prix moyen : ${restaurant.prixMoyen} USD/personne</p>
-                <a class="newLink" href="${`../pages/moretest.html?slug=${restaurant.slug}`}">En savoir plus</a>
-            `;
-            div.classList.add('next');
-            searchName.appendChild(div);
-            searchName.classList.replace('no-flex', 'flex');
-        });
-
-    }
-}
-
-const searchByName = (critere) => {
-    // Clear previous results
-    searchName.innerHTML = '';
-    
-    if (!critere) {
-        searchName.innerHTML = '<p>Aucun nom de restaurant spécifié.</p>';
-        return;
-    }
-
-    const results = restau.filter(restaurant => 
-        restaurant.nom.toLowerCase().replace(/[^a-zA-Z0-9 ]/g,"").includes(critere.toLowerCase().replace(/[^a-zA-Z0-9 ]/g,""))
-    );
-
-    if (results.length === 0) {
-        searchName.innerHTML = '<p>Aucun restaurant trouvé avec ce nom.</p>';
-        return;
-    }
-
-    results.forEach(restaurant => {
-        const div = document.createElement('div');
-        div.innerHTML = `
-            <h2>${restaurant.nom}</h2>
-            <p>Commune : ${restaurant.commune || "Nan"}</p>
-            <p>Type de cuisine : ${restaurant.type}</p>
-            <p>Prix moyen : ${restaurant.prixMoyen} USD/personne</p>
-            <a class="newLink" href="${`../pages/moretest.html?slug=${restaurant.slug}`}">En savoir plus</a>
-        `;
-        div.classList.add('next');
-        searchName.appendChild(div);
-        searchName.classList.replace('no-flex', 'flex');
+            });
+            resolve();
+        }, 100); // Small delay to allow UI to update
     });
-}
+};
 
-const searching = (name, township, typeCuisine) => {
-    searchName.innerHTML = '';
-    console.log(name, township, typeCuisine);
-    
-    let results = [];
-
-    if (name) {
-        searchByName(name);
-        return;
-    }
-
-    if (township && typeCuisine) {
-        results = restau.filter(restaurant => 
-            restaurant.commune.toLowerCase().normalize("NFD").replace(/[^a-zA-Z0-9 ]/g,"") === township.toLowerCase().replace(/[^a-zA-Z0-9 ]/g,"").normalize("NFD") && restaurant.type.toLowerCase().normalize("NFD").replace(/[^a-zA-Z0-9 ]/g,"") === typeCuisine.toLowerCase().normalize("NFD").replace(/[^a-zA-Z0-9 ]/g,"")
-        );
-    } else if (township) {
-        results = restau.filter(restaurant => 
-            restaurant.commune.toLowerCase().normalize("NFD").replace(/[^a-zA-Z0-9 ]/g,"") === township.toLowerCase().normalize("NFD").replace(/[^a-zA-Z0-9 ]/g,"")
-        );
-    } else if (typeCuisine) {
-        results = restau.filter(restaurant => 
-            restaurant.type.toLowerCase().normalize("NFD").replace(/[^a-zA-Z0-9 ]/g,"") === typeCuisine.toLowerCase().normalize("NFD").replace(/[^a-zA-Z0-9 ]/g,"")
-        );
-    }
-
-    if (results.length === 0) {
-        searchName.classList.replace('no-flex', 'flex');
-        searchName.innerHTML = '<p>Aucun restaurant trouvé avec ces critères.</p>';
-        return;
-    }
-
-    results.forEach(restaurant => {
-        const div = document.createElement('div');
-        div.innerHTML = `
-            <h2>${restaurant.nom}</h2>
-            <p>Commune : ${restaurant.commune || "Nan"}</p>
-            <p>Type de cuisine : ${restaurant.type}</p>
-            <p>Prix moyen : ${restaurant.prixMoyen} USD/personne</p>
-            <a class="newLink" href="${`../pages/moretest.html?slug=${restaurant.slug}`}">En savoir plus</a>
-        `;
-        div.classList.add('next');
-        searchName.appendChild(div);
-        searchName.classList.replace('no-flex', 'flex');
-
-    });
-}
-
-document.getElementById("searcher").addEventListener('submit', function(e) {
+// Form handlers with proper async/await
+document.getElementById("searcher")?.addEventListener('submit', async function(e) {
     e.preventDefault();
-    const isDate = document.querySelector('input[name="dateOrNot"]:checked')?.value || "No";
-    const nbrePersonne = parseInt(document.getElementById('range-personne').value);
-    const min = parseInt(document.getElementById('range').value);
-    const max = (min/nbrePersonne) + 5;
-    console.log(isDate);
-    searchByBudget(max, min, nbrePersonne, isDate);
+    
+    try {
+        // Show loader immediately
+        showLoader();
+        
+        // Get form values
+        const isDate = document.querySelector('input[name="dateOrNot"]:checked')?.value || "No";
+        const nbrePersonne = parseInt(document.getElementById('range-personne')?.value) || 1;
+        const min = parseInt(document.getElementById('range')?.value) || 0;
+        const max = (min / nbrePersonne) + 5;
+        
+        // Minimum 2 seconds loader display
+        const searchStartTime = Date.now();
+        
+        // Perform search
+        await searchByBudget(max, min, nbrePersonne, isDate);
+        
+        // Calculate remaining time to reach 2 seconds
+        const elapsed = Date.now() - searchStartTime;
+        const remaining = Math.max(0, 2000 - elapsed);
+        
+        // Hide loader after remaining time
+        setTimeout(hideLoader, remaining);
+    } catch (error) {
+        console.error("Search error:", error);
+        hideLoader();
+    }
 });
 
-document.getElementById('searching').addEventListener('submit', function(e) {
+document.getElementById('searching')?.addEventListener('submit', async function(e) {
     e.preventDefault();
-    const commune = document.getElementById('restaurant-commune').value;
-    const type = document.getElementById('restaurant-type').value;
-    const name = document.getElementById('restaurant-name').value;
-    searching(name, commune, type);
+    
+    try {
+        // Show loader immediately
+        showLoader();
+        
+        // Get form values
+        const commune = document.getElementById('restaurant-commune')?.value || '';
+        const type = document.getElementById('restaurant-type')?.value || '';
+        const name = document.getElementById('restaurant-name')?.value || '';
+        
+        // Minimum 2 seconds loader display
+        const searchStartTime = Date.now();
+        
+        // Perform search
+        await searching(name, commune, type);
+        
+        // Calculate remaining time to reach 2 seconds
+        const elapsed = Date.now() - searchStartTime;
+        const remaining = Math.max(0, 2000 - elapsed);
+        
+        // Hide loader after remaining time
+        setTimeout(hideLoader, remaining);
+    } catch (error) {
+        console.error("Search error:", error);
+        hideLoader();
+    }
 });
+
+// Best of slider code remains the same...
 const bestOfContainer = document.getElementById('best-of-container');
 const bestOf = [
     {
