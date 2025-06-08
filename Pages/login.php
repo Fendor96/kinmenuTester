@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -5,7 +9,7 @@
     <link rel="icon" href="../Styles/assets/favicon.ico" type="image/x-icon">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta http-equiv="Permissions-Policy" content="clipboard-read=self, clipboard-write=self">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
     
@@ -13,11 +17,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Préchargement pour optimisation -->
+    <link rel="preconnect" href="https://accounts.google.com">
+    <link rel="preload" href="https://accounts.google.com/gsi/client" as="script">    
+    
     
     <link rel="stylesheet" href="../Styles/header.css">
     <link rel="stylesheet" href="../Styles/signup.css">
-    <title>Inscription - Kin Menu</title>
+    <title>Connexion - Kin Menu</title>
 </head>
+
+
 <body>
     <!-- Header -->
     <header>
@@ -30,8 +41,8 @@
                 <li><a href="./apropos.html">À propos</a></li>
             </ul>
             <div class="auth-links">
-                <a href="./signup.html" class="active">S'inscrire</a>
-                <a href="./login.html">Se connecter</a>
+                <a href="./signup.html">S'inscrire</a>
+                <a href="./login.html" class="active">Se connecter</a>
             </div>
         </nav>
 
@@ -49,21 +60,27 @@
             <li><a href="../index.html">Accueil</a></li>
             <li><a href="./discover.html">Découvrir</a></li>
             <li><a href="./apropos.html">À propos</a></li>
-            <li><a href="./signup.html" class="active">S'inscrire</a></li>
-            <li><a href="./login.html">Se connecter</a></li>
+            <li><a href="./signup.html" >S'inscrire</a></li>
+            <li><a href="./login.html" class="active">Se connecter</a></li>
         </ul>
     </div>
+
+    <div id="loading-indicator">
+        <div class="loader"></div>
+    </div>
+
 
     <!-- Main Content -->
     <main class="signup-container">
         <div class="signup-card">
             <div class="signup-header">
-                <h1>Connctez vous !</h1>
+                <h1>Connectez vous !</h1>
                 <p>C'est un plaisir de vous revoir parmis nous !</p>
             </div>
             
-            <form class="signup-form" method="post" action="../configuration/login.php">
-                
+            <form class="signup-form" id="login-form">
+                <div id="message" style="color: rgb(121, 0, 0); margin-top: 10px; text-align: center;"></div>
+
                 <div class="form-group">
                     <label for="email">Adresse email</label>
                     <div class="input-with-icon">
@@ -95,10 +112,12 @@
                 </div>
                 
                 <div class="social-login">
-                    <button type="button" class="social-btn google-btn">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
-                        Continuer avec Google
-                    </button>
+                    <div id="google-login-container" style="display: none;">
+                        <button type="button" class="social-btn google-btn" id="google-login-btn">
+                            <i class="fab fa-google"></i>
+                            Continuer avec Google
+                        </button>
+                    </div>
                     <button type="button" class="social-btn apple-btn">
                         <i class="fab fa-apple"></i>
                         Continuer avec Apple
@@ -109,8 +128,12 @@
                     Vous n'avez pas encore de compte? <a href="./signup.html">Créer un compte</a>
                 </div>
             </form>
+
         </div>
     </main>
+
+    <div id="loader" style="display: none;"></div>
+
 
     <!-- Footer -->
     <footer>
@@ -152,7 +175,12 @@
         </div>
     </footer>
 
+    <script src="../script/login.js"></script>
     <script src="../script/header.js"></script>
     <script src="../script/internet-checker.js"></script>
+
+
+
+
 </body>
 </html>

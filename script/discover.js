@@ -55,14 +55,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Gestion des événements pour les sliders de budget et de personnes
 const range = document.getElementById('range');
+const price = document.getElementById('price');
 const rangeValue = document.getElementById('range-value');
 const rangeValueCdf = document.getElementById('range-value-cdf');
 const rangePersonne = document.getElementById('range-personne');
 const rangePersonneValue = document.getElementById('range-personne-value');
 let tauxDuJour = 2800;
 
+
 range.addEventListener('input', () => {
     rangeValue.textContent = range.value + "$";
+    price.value = range.value;
+    rangeValueCdf.textContent = parseInt(range.value) * tauxDuJour + "Fc";
+});
+
+price.addEventListener('input', ()=>{
+    rangeValue.textContent = price.value + '$';
+    range.value = price.value;
     rangeValueCdf.textContent = parseInt(range.value) * tauxDuJour + "Fc";
 });
 

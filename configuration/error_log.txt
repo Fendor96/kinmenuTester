@@ -1,0 +1,6 @@
+ [2025-06-07 17:41:17] Erreur lors de l'insertion des données de journalisationSQLSTATE[42S02]: Base table or view not found: 1146 Table 'resto_kin_db.user' doesn't exist
+ [2025-06-07 20:46:42] Erreur PDOEXCEPTION, lors du LOGIN: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'resto_kin_db.user' doesn't exist
+ [2025-06-07 20:48:40] Utilisateur introuvé pour: 
+ [2025-06-07 20:49:48] Utilisateur introuvé pour: 
+ [2025-06-07 20:54:42] Utilisateur introuvé pour: 
+ [2025-06-07 20:55:34] Utilisateur introuvé pour: 

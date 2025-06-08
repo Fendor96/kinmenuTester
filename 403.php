@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kin Webb - ERREUR 404 !</title>
+    <title>Kin Webb - ERREUR 403 !</title>
     <style>
 
         .divider{

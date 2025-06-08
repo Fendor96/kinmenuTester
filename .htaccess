@@ -6,3 +6,4 @@ RewriteRule ^more/([a-z0-9-]+)$ more.php?slug=$1 [QSA,L]
 ErrorDocument 404 /Kin-menu/404.php
 ErrorDocument 403 /Kin-menu/403.php
 ErrorDocument 500 /Kin-menu/500.php
+
