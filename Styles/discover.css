@@ -939,7 +939,28 @@ input[type="text"]:hover{
 }
 
 
+#loader-container {
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Or whatever height you need */
+    width: 100%;
+    margin-top: 20px;
+}
 
+#loading {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 
 
@@ -1144,20 +1165,7 @@ footer .infos{
     }
 }
 
-#loader-container{
-    display: flex;
-    justify-content: center;
-    visibility:hidden;
-}
 
-#loading{
-    width: 50px;
-    height: 50px;
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #db3a00;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
 
 #price{
     padding: 10px !important;
@@ -1165,4 +1173,43 @@ footer .infos{
     border-radius: 15px;
 }
 
+
+/* loader-container will overlay the content */
+#loader-container {
+    display: flex; /* Use flexbox to center the spinner */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    position: fixed; /* Position fixed to cover the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    z-index: 1000; /* Ensure it's on top of other content */
+    transition: opacity 0.3s ease-in-out; /* Smooth fade-in/out */
+    opacity: 0; /* Hidden by default */
+    visibility: hidden; /* Hidden by default */
+}
+
+/* Style for the actual spinning animation */
+#loading-spinner {
+    border: 8px solid #f3f3f3; /* Light grey border */
+    border-top: 8px solid #db3a00; /* Blue border for the top (creates the spin effect) */
+    border-radius: 50%; /* Makes it a circle */
+    width: 60px; /* Size of the spinner */
+    height: 60px;
+    animation: spin 1s linear infinite; /* Apply the spinning animation */
+}
+
+/* Keyframes for the spinning animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Classes to control visibility with JavaScript */
+#loader-container.show {
+    opacity: 1;
+    visibility: visible;
+}
 

@@ -5,10 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
+    <style>
 
-    <div id="best-of-container"></div>
+    </style>
+    
+    <div id="modalLogin" class="flexM">
+        <i class="fas fa-times close-btn" onclick="this.parentElement.style.display='none'"></i>
+        <div id="imgM"></div>
+        <h1 class="titleM">KIN MENU</h1>
+        <p>Vous devez <span class="highlightM">avoir un compte</span> pour voir plus d'informations</p>
+        <div class="btn-containerM">
+            <a href="./Pages/signup.html" class="btn-primaryM">
+                <i class="fas fa-user-plus"></i> Créez un compte gratuitement
+            </a>
+            <a href="./Pages/login.php" class="btn-secondaryM">
+                <i class="fas fa-sign-in-alt"></i> Vous avez déjà un compte ?
+            </a>
+        </div>
+    </div>
     
     <script src="./script/test.js"></script>
 </body>

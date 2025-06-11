@@ -1,0 +1,57 @@
+/* Styles pour le Loader Global Conteneur */
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@100..900&display=swap');
+#global-page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff; /* Fond blanc pur */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.7s ease-out; /* Transition légèrement plus longue pour un fondu plus doux */
+}
+
+/* Conteneur pour le spinner et le texte */
+#global-page-loader .loader-content {
+    display: flex;
+    flex-direction: column; /* Empile le spinner et le texte verticalement */
+    align-items: center; /* Centre horizontalement le contenu */
+    gap: 20px; /* Espace entre le spinner et le texte */
+}
+
+/* Styles du Spinner KIN MENU */
+.spinner-kinmenu {
+    border: 8px solid rgba(219, 58, 0, 0.2); /* Anneau de base : couleur #db3a00 avec 20% d'opacité */
+    border-top: 8px solid #db3a00; /* Partie supérieure de l'anneau : couleur #db3a00 pleine */
+    border-radius: 50%; /* Rend le div circulaire */
+    width: 70px; /* Taille du spinner */
+    height: 70px;
+    animation: spin-kinmenu 1.2s cubic-bezier(0.55, 0.15, 0.45, 0.85) infinite; /* Animation plus élégante */
+}
+
+/* Animation du Spinner */
+@keyframes spin-kinmenu {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Styles du texte "KIN MENU" */
+.loader-text {
+    font-family: 'Pacifico', sans-serif; /* Police par défaut. Vous pouvez importer 'Montserrat' ou 'Roboto' via Google Fonts pour un plus bel effet */
+    font-size: 2.8em; /* Grande taille de texte */
+    font-weight: bold;
+    color: #db3a00; /* Couleur principale du texte */
+    text-transform: uppercase; /* Met le texte en majuscules */
+    letter-spacing: 2px; /* Espace entre les lettres */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.15); /* Légère ombre pour du relief */
+}
+
+/* Optionnel: Si vous voulez une police Google Fonts */
+/* Ajoutez ceci dans votre section <head> de votre HTML */
+/* <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet"> */
+/* Ensuite, dans .loader-text, utilisez: font-family: 'Montserrat', sans-serif; */

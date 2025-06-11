@@ -22,7 +22,7 @@ session_start();
     <link rel="preconnect" href="https://accounts.google.com">
     <link rel="preload" href="https://accounts.google.com/gsi/client" as="script">    
     
-    
+    <link rel="stylesheet" href="../Styles/globalLoader.css">
     <link rel="stylesheet" href="../Styles/header.css">
     <link rel="stylesheet" href="../Styles/signup.css">
     <title>Connexion - Kin Menu</title>
@@ -30,6 +30,12 @@ session_start();
 
 
 <body>
+    <div id="global-page-loader">
+        <div class="loader-content">
+            <div class="spinner-kinmenu"></div>
+            <div class="loader-text">KIN <br> MENU</div>
+        </div>
+    </div>
     <!-- Header -->
     <header>
         <div id="logo"><a href="../index.html" style="text-decoration: none; color: inherit; font-family: inherit;"> KIN <br> MENU</a></div>
@@ -175,6 +181,7 @@ session_start();
         </div>
     </footer>
 
+    <script src="../script/globalLoader.js"></script>
     <script src="../script/login.js"></script>
     <script src="../script/header.js"></script>
     <script src="../script/internet-checker.js"></script>

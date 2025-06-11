@@ -28,8 +28,22 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             // Update the text content of the respective elements
             // Use more descriptive variable names for clarity (e.g., favorisElement)
-            favorisElement.textContent = data.favoris || 'N/A'; // Provide a fallback if data.favoris is null/undefined
-            historiqueElement.textContent = data.users || 'N/A'; // Provide a fallback if data.users is null/undefined
+            favorisElement.textContent = data.data.favoris.length == 0 ? "N/A" : data.data.favoris  || 'N/A'; // Provide a fallback if data.favoris is null/undefined
+
+                const nom = document.getElementById('nom');
+                const dateCreation = document.getElementById('date');
+                const nomInput = document.getElementById('nomInput');
+                const email = document.getElementById('email');
+                const phone = document.getElementById('phone');
+                const currentPassword = document.getElementById('current-password');
+                nom.textContent = data.data.user.username || "NAN";
+                nomInput.value = data.data.user.username || "NAN";
+                email.value = data.data.user.email || "NAN";
+                currentPassword.value = data.data.user.password;
+                dateCreation.textContent = data.data.user.created_at || "NAN";
+                if(phone){
+                    phone.value = data.data.user.phone || "NAN";
+                }
 
         } else {
             // If data.success is false, display the message from the API or a generic one

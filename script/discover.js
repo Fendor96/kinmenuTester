@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Gestion de la modal de connexion
+    /* Gestion de la modal de connexion
     const modals = document.getElementById('modal-login');
 
     document.getElementById('modal-login-btn').addEventListener('click', () => {
@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("Pas de modal trouvé");
         }
     });
+    */
 });
 
 

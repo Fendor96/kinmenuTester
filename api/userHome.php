@@ -50,7 +50,7 @@ try {
         $response['data']['favoris'] = $usersFavoris;
         // Append to message if user data was also found, or set if only favorites were found
         if (!empty($users)) {
-            $response['message'] .= " Favorites also retrieved successfully.";
+            $response['message'] .= "Favorites also retrieved successfully.";
         } else {
             $response['message'] = "Favorites retrieved successfully.";
         }

@@ -5,6 +5,7 @@
     <link rel="icon" href="../Styles/assets/favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Détails du Restaurant</title>
+    <link rel="stylesheet" href="../Styles/globalLoader.css">
     <link rel="stylesheet" href="../Styles/header.css">
     <style>
         :root {
@@ -259,6 +260,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <div id="global-page-loader">
+        <div class="loader-content">
+            <div class="spinner-kinmenu"></div>
+            <div class="loader-text">KIN <br> MENU</div>
+        </div>
+    </div>
     <!-- Header -->
     <header>
         <div id="logo" style="font-family: Pacifico !important;"><a href="../index.html" style="text-decoration: none; color: inherit; font-family: inherit;"> KIN <br> MENU</a></div>
@@ -431,6 +438,8 @@
             <p>Créé par Axel Nodier</p>
         </div>
     </footer>
+
+    <script src="../script/globalLoader.js"></script>
     <script src="../script/header.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {

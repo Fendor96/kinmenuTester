@@ -12,6 +12,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="author" content="Axel Nodier">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Dashboard - Kin Menu</title>
 
@@ -22,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Pacifico&display=swap" rel="stylesheet">
 
-
+    <link rel="stylesheet" href="../Styles/globalLoader.css">
     <link rel="stylesheet" href="../Styles/home.css">
     <link rel="stylesheet" href="../Styles/styles.css">
     <link rel="stylesheet" href="../Styles/header.css">
@@ -30,6 +31,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <div id="global-page-loader">
+        <div class="loader-content">
+            <div class="spinner-kinmenu"></div>
+            <div class="loader-text">KIN <br> MENU</div>
+        </div>
+    </div>
     <!-- Header cohérent avec le style existant -->
     <header>
         <div id="logo">KIN <br> MENU</div>
@@ -56,11 +63,11 @@
             <i class="fas fa-times"></i>
         </button>
         <ul class="mobile-links">
-            <li><a href="./index.html" class="active">Accueil</a></li>
-            <li><a href="./Pages/discover.html">Rechercher <i class="fa-solid fa-search"></i></a></li>
-            <li><a href="./Pages/apropos.html">Mes Favoris <i class="fa-solid fa-heart"></i></a></li>
-            <li><a href="./Pages/signup.html">Mon compte <i class="fa-solid fa-account"></i></a></li>
-            <li><a href="./Pages/login.html">Deconnexion <i class="fa-solid fa-right-from-bracket"></i></a></li>
+            <li><a href="./home.php" class="active">Accueil</a></li>
+            <li><a href="./discover.php">Rechercher <i class="fa-solid fa-search"></i></a></li>
+            <li><a href="./favoris.php">Mes Favoris <i class="fa-solid fa-heart"></i></a></li>
+            <li><a href="./account.php">Mon compte <i class="fa-solid fa-account"></i></a></li>
+            <li><a href=".deconnexion.php">Deconnexion <i class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>
     </div>
 
@@ -80,7 +87,6 @@
                     <i class="fas fa-heart" style="color: var(--colorPrinc);"></i>
                     <span class="stat-number" id="favoris"></span>
                     <span class="stat-label">Favoris</span>
-                    <span id="messageDiv" style="color: red;text-align:center;"></span>
                 </div>
                 <div class="stat-item">
                     <i class="fas fa-search" style="color: var(--colorSecon);"></i>
@@ -89,8 +95,8 @@
                 </div>
                 <div class="stat-item">
                     <i class="fas fa-calendar-check" style="color: var(--colorPrinc);"></i>
-                    <span class="stat-number">5</span>
-                    <span class="stat-label">Réservations</span>
+                    <span class="stat-number"></span>
+                    <span class="stat-label">Visités</span>
                 </div>
             </div>
         </section>
@@ -162,6 +168,7 @@
         <!-- Footer existant -->
     <?php require_once 'footer.php'; ?>         
 
+    <script src="../script/globalLoader.js"></script>
     <script src="../script/userGestion.js"></script>
     <script src="../script/header.js"></script>
     <script>
@@ -173,10 +180,7 @@
             budgetValue.value = this.value + ' €';
         });
 
-        // Menu hamburger
-        document.getElementById('hamburgerBtn').addEventListener('click', function() {
-            document.querySelector('.nav').classList.toggle('activate');
-        });
+
     </script>
 </body>
 </html>

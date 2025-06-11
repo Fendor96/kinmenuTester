@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Pacifico&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="./Styles/globalLoader.css">
     <!-- Title -->
     <title>Kin Menu - Trouvez les meilleurs restaurants à Kinshasa</title>
     
@@ -760,6 +760,14 @@
     </style>
 </head>
 <body>
+
+    <div id="global-page-loader">
+        <div class="loader-content">
+            <div class="spinner-kinmenu"></div>
+            <div class="loader-text">KIN <br> MENU</div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header>
         <div id="logo">KIN <br> MENU</div>
@@ -962,6 +970,7 @@
     </div>
 
     <!-- JavaScript -->
+    <script src="./script/globalLoader.js"></script>
     <script>
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
