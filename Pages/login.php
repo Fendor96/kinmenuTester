@@ -48,7 +48,7 @@ session_start();
             </ul>
             <div class="auth-links">
                 <a href="./signup.html">S'inscrire</a>
-                <a href="./login.html" class="active">Se connecter</a>
+                <a href="./login.php" class="active">Se connecter</a>
             </div>
         </nav>
 
@@ -67,7 +67,7 @@ session_start();
             <li><a href="./discover.html">Découvrir</a></li>
             <li><a href="./apropos.html">À propos</a></li>
             <li><a href="./signup.html" >S'inscrire</a></li>
-            <li><a href="./login.html" class="active">Se connecter</a></li>
+            <li><a href="./login.php" class="active">Se connecter</a></li>
         </ul>
     </div>
 
